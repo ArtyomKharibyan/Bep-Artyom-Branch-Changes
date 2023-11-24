@@ -86,11 +86,11 @@ export const Carousel = ({ redirectToIndividual, slider, title }: ICarouselProps
             />
             <div className="flex h-[300px] flex-col justify-between">
               <div className="flex h-[150px] w-full flex-col justify-between">
-                <h3 className="mb-2.5 h-[90px] text-xl line-clamp-2">{item.header}</h3>
-                <p className="h-[45px] text-black-light line-clamp-2 ">{item.paragraph}</p>
+                <h3 className="mb-2.5 line-clamp-2 h-[90px] text-xl">{item.header}</h3>
+                <p className="line-clamp-2 h-[45px] text-black-light ">{item.paragraph}</p>
               </div>
               <div className="flex w-full flex-col items-center justify-center">
-                <p className="mb-10 text-black-light line-clamp-2 ">{item.postedAt}</p>
+                <p className="mb-10 line-clamp-2 text-black-light ">{item.postedAt}</p>
                 <Button
                   size="fl"
                   variant="outlined"

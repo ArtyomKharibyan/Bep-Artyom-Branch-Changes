@@ -25,6 +25,7 @@ import { viewsMiddleware } from '../../redux/slices/views'
 
 const PAGE_BOTTOM = 600
 
+// eslint-disable-next-line max-lines-per-function
 const SearchPage = () => {
   const isEducationalInstitutesLoading = useAppSelector(
     educationalInstitutesSelector.isIndividualEduInstituteLoading
@@ -77,17 +78,19 @@ const SearchPage = () => {
 
   useEffect(() => {
     const onScroll = () => {
-      const pageCount = Math.ceil(totalItems / pageSize)
+      if (!isEducationalInstitutesLoading) {
+        const pageCount = Math.ceil(totalItems / pageSize)
 
-      if (filters.page < Math.round(pageCount)) {
-        const { scrollTop } = document.documentElement
-        const { scrollHeight } = document.documentElement
-        const { clientHeight } = document.documentElement
+        if (filters.page < Math.round(pageCount)) {
+          const { scrollTop } = document.documentElement
+          const { scrollHeight } = document.documentElement
+          const { clientHeight } = document.documentElement
 
-        if (scrollTop + clientHeight + PAGE_BOTTOM > scrollHeight) {
-          dispatch(
-            educationalInstitutesMiddleware.setEIFilters({ ...filters, page: filters.page + 1 })
-          )
+          if (scrollTop + clientHeight + PAGE_BOTTOM > scrollHeight) {
+            dispatch(
+              educationalInstitutesMiddleware.setEIFilters({ ...filters, page: filters.page + 1 })
+            )
+          }
         }
       }
     }
@@ -95,7 +98,14 @@ const SearchPage = () => {
     window.addEventListener('scroll', onScroll)
 
     return () => window.removeEventListener('scroll', onScroll)
-  }, [edInstitutesList, filters, filters.page, pageSize, totalItems])
+  }, [
+    edInstitutesList,
+    filters,
+    filters.page,
+    isEducationalInstitutesLoading,
+    pageSize,
+    totalItems,
+  ])
 
   return (
     <Container>

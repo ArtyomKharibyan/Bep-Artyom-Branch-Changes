@@ -53,7 +53,6 @@ const AboutUs = () => {
       dispatch(aboutUsMiddleware.resetChangeTeamMemberSubmitSuccess())
       setChangeMember(null)
     }
-    //   eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isChangeTeamMemberSubmitSuccess])
 
   return (
